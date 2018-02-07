@@ -1,0 +1,33 @@
+<h1>Your Shopping Cart</h1>
+
+
+<table class="table">
+	<thead>
+		<tr>
+		<th>Product</th>
+		<th>Unit Price</th>
+		<th>Quantity</th>
+		<th>Total Price</th>
+		</tr>
+		</thead>
+		<tbody>
+			<% total = 0 %>
+			<% @line_items.each do |line_item| %>
+			<tr>
+				<td><%= line_item.product.name %></td>
+				<td><%= number_to_currency(line_item.product.price) %></td>
+				<td><%= line_item.quantity %></td>
+				<td><%= number_to_currency(line_item.line_item_total) %></td>
+			</tr>
+			<% total += line_item.line_item_total %>
+			<% end %>
+			<tr>
+				<td colspan="3"></td>
+				<td> Order Total: <%=number_to_currency total %></td>
+			</tr>
+	</tbody>
+</table>
+
+<div>
+	<%= link_to "Proceed to Checkout", checkout_path, class:"btn btn-success" %>
+</div>
